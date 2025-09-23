@@ -1,0 +1,127 @@
+[
+  {
+    "id": "disruption-001",
+    "type": "weather_delay",
+    "title": "Fog at Delhi Airport",
+    "description": "Low visibility conditions causing departure delays",
+    "severity": "medium",
+    "status": "active",
+    "affectedFlights": ["flight-001", "flight-003"],
+    "affectedCrew": ["crew-001", "crew-002", "crew-003", "crew-006"],
+    "startTime": "2024-12-16T04:00:00Z",
+    "estimatedEndTime": "2024-12-16T08:00:00Z",
+    "impactAssessment": {
+      "delayMinutes": 120,
+      "crewDutyImpact": "moderate",
+      "passengerImpact": "high",
+      "operationalCost": "medium"
+    },
+    "mitigationActions": [
+      "Activate standby crew for extended duty periods",
+      "Coordinate with ATC for priority clearance when conditions improve",
+      "Passenger rebooking on later flights"
+    ],
+    "createdAt": "2024-12-16T04:15:00Z",
+    "updatedAt": "2024-12-16T06:30:00Z"
+  },
+  {
+    "id": "disruption-002", 
+    "type": "crew_sick_leave",
+    "title": "First Officer Unavailable",
+    "description": "Crew member called in sick, replacement needed",
+    "severity": "high",
+    "status": "active",
+    "affectedFlights": ["flight-004"],
+    "affectedCrew": ["crew-005"],
+    "startTime": "2024-12-16T02:00:00Z",
+    "estimatedEndTime": "2024-12-18T09:00:00Z",
+    "impactAssessment": {
+      "delayMinutes": 0,
+      "crewDutyImpact": "high",
+      "passengerImpact": "low",
+      "operationalCost": "low"
+    },
+    "mitigationActions": [
+      "Contact standby First Officers from CCU base",
+      "Consider crew repositioning from nearby bases",
+      "Monitor crew member's recovery status"
+    ],
+    "createdAt": "2024-12-16T02:15:00Z",
+    "updatedAt": "2024-12-16T02:15:00Z"
+  },
+  {
+    "id": "disruption-003",
+    "type": "technical_issue",
+    "title": "Aircraft Technical Fault",
+    "description": "Engine warning light, aircraft grounded for inspection",
+    "severity": "critical",
+    "status": "active",
+    "affectedFlights": ["flight-006"],
+    "affectedCrew": [],
+    "startTime": "2024-12-16T19:45:00Z",
+    "estimatedEndTime": "2024-12-17T08:00:00Z",
+    "impactAssessment": {
+      "delayMinutes": 720,
+      "crewDutyImpact": "low",
+      "passengerImpact": "critical",
+      "operationalCost": "high"
+    },
+    "mitigationActions": [
+      "Flight cancelled, passengers rebooked",
+      "Aircraft replacement being arranged",
+      "Engineering team conducting detailed inspection"
+    ],
+    "createdAt": "2024-12-16T19:50:00Z",
+    "updatedAt": "2024-12-16T20:15:00Z"
+  },
+  {
+    "id": "disruption-004",
+    "type": "crew_no_show",
+    "title": "Flight Attendant No Show",
+    "description": "Crew member failed to report for duty",
+    "severity": "medium",
+    "status": "resolved",
+    "affectedFlights": ["flight-005"],
+    "affectedCrew": ["crew-temp-001"],
+    "startTime": "2024-12-16T11:30:00Z",
+    "estimatedEndTime": "2024-12-16T12:00:00Z",
+    "impactAssessment": {
+      "delayMinutes": 30,
+      "crewDutyImpact": "low",
+      "passengerImpact": "low",
+      "operationalCost": "low"
+    },
+    "mitigationActions": [
+      "Standby crew member activated",
+      "HR investigation initiated",
+      "Flight departed with minimal delay"
+    ],
+    "createdAt": "2024-12-16T11:35:00Z",
+    "updatedAt": "2024-12-16T12:00:00Z"
+  },
+  {
+    "id": "disruption-005",
+    "type": "airspace_restriction",
+    "title": "VIP Movement Airspace Closure",
+    "description": "Temporary airspace restriction affecting departures",
+    "severity": "low",
+    "status": "scheduled",
+    "affectedFlights": ["flight-002"],
+    "affectedCrew": [],
+    "startTime": "2024-12-16T15:00:00Z",
+    "estimatedEndTime": "2024-12-16T16:00:00Z",
+    "impactAssessment": {
+      "delayMinutes": 45,
+      "crewDutyImpact": "minimal",
+      "passengerImpact": "low",
+      "operationalCost": "minimal"
+    },
+    "mitigationActions": [
+      "Coordinate with ATC for alternate routing",
+      "Adjust departure times accordingly",
+      "Monitor for early airspace opening"
+    ],
+    "createdAt": "2024-12-16T09:00:00Z",
+    "updatedAt": "2024-12-16T09:00:00Z"
+  }
+]

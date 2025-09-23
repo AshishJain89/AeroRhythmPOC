@@ -1,0 +1,383 @@
+{
+  "test_execution": {
+    "timestamp": "2025-09-22T11:55:45.520665",
+    "total_duration": 3.048976421356201,
+    "test_suites_run": 6,
+    "test_suites_passed": 0,
+    "overall_success_rate": 0.0
+  },
+  "test_suite_results": {
+    "frontend": {
+      "status": "FAIL",
+      "duration": 0.18778681755065918,
+      "output": "",
+      "error": "Traceback (most recent call last):\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_frontend.py\", line 369, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_frontend.py\", line 356, in main\n    results = tester.run_all_tests()\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_frontend.py\", line 313, in run_all_tests\n    print(\"\\U0001f9ea Starting Comprehensive Frontend Testing...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ashish.jain\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f9ea' in position 0: character maps to <undefined>\n"
+    },
+    "backend": {
+      "status": "FAIL",
+      "duration": 0.31589555740356445,
+      "output": "",
+      "error": "Traceback (most recent call last):\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_backend.py\", line 506, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_backend.py\", line 493, in main\n    results = tester.run_all_tests()\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_backend.py\", line 437, in run_all_tests\n    print(\"\\U0001f9ea Starting Comprehensive Backend Testing...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ashish.jain\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f9ea' in position 0: character maps to <undefined>\n"
+    },
+    "database": {
+      "status": "FAIL",
+      "duration": 0.9743592739105225,
+      "output": "",
+      "error": "Traceback (most recent call last):\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_database.py\", line 635, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_database.py\", line 622, in main\n    results = tester.run_all_tests()\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_database.py\", line 571, in run_all_tests\n    print(\"\\U0001f9ea Starting Comprehensive Database Testing...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ashish.jain\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f9ea' in position 0: character maps to <undefined>\n"
+    },
+    "e2e": {
+      "status": "FAIL",
+      "duration": 0.2769894599914551,
+      "output": "",
+      "error": "Traceback (most recent call last):\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_e2e.py\", line 771, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_e2e.py\", line 754, in main\n    results = tester.run_all_tests()\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_e2e.py\", line 694, in run_all_tests\n    print(\"\\U0001f9ea Starting Comprehensive End-to-End Testing...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ashish.jain\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f9ea' in position 0: character maps to <undefined>\n"
+    },
+    "disruption": {
+      "status": "FAIL",
+      "duration": 1.0170197486877441,
+      "output": "",
+      "error": "Traceback (most recent call last):\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_disruptions.py\", line 858, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_disruptions.py\", line 841, in main\n    results = tester.run_all_tests()\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_disruptions.py\", line 774, in run_all_tests\n    print(\"\\U0001f9ea Starting Comprehensive Disruption Testing...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ashish.jain\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f9ea' in position 0: character maps to <undefined>\n"
+    },
+    "ai_stress": {
+      "status": "FAIL",
+      "duration": 0.2706265449523926,
+      "output": "",
+      "error": "Traceback (most recent call last):\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_ai_stress.py\", line 870, in <module>\n    main()\n    ~~~~^^\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_ai_stress.py\", line 844, in main\n    results = tester.run_all_tests()\n  File \"C:\\Users\\ashish.jain\\Documents\\Projects\\AeroRhythmPOC\\backend\\tests\\test_ai_stress.py\", line 782, in run_all_tests\n    print(\"\\U0001f9ea Starting Comprehensive AI and Stress Testing...\")\n    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\ashish.jain\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\encodings\\cp1252.py\", line 19, in encode\n    return codecs.charmap_encode(input,self.errors,encoding_table)[0]\n           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nUnicodeEncodeError: 'charmap' codec can't encode character '\\U0001f9ea' in position 0: character maps to <undefined>\n"
+    }
+  },
+  "individual_test_results": {
+    "frontend": {
+      "total_tests": 6,
+      "passed_tests": 3,
+      "success_rate": 50.0,
+      "duration": 0.022644996643066406,
+      "results": [
+        {
+          "test": "Frontend Build",
+          "status": "FAIL",
+          "details": "Build error: [WinError 2] The system cannot find the file specified",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.413781"
+        },
+        {
+          "test": "Frontend Dev Server",
+          "status": "FAIL",
+          "details": "Server start error: [WinError 2] The system cannot find the file specified",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.417117"
+        },
+        {
+          "test": "Component AppShell",
+          "status": "FAIL",
+          "details": "Failed checks: Component has JSX",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.418028"
+        },
+        {
+          "test": "Component Header",
+          "status": "FAIL",
+          "details": "Failed checks: Component has JSX",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.418770"
+        },
+        {
+          "test": "Component Sidebar",
+          "status": "FAIL",
+          "details": "Failed checks: Component has JSX",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.419509"
+        },
+        {
+          "test": "Component CrewCard",
+          "status": "FAIL",
+          "details": "Component file not found",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.419886"
+        },
+        {
+          "test": "Component DisruptionsFeed",
+          "status": "FAIL",
+          "details": "Failed checks: Component has JSX",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.420710"
+        },
+        {
+          "test": "Component SearchBar",
+          "status": "FAIL",
+          "details": "Component file not found",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.421095"
+        },
+        {
+          "test": "Component TimelineView",
+          "status": "FAIL",
+          "details": "Component file not found",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:53:16.421362"
+        },
+        {
+          "test": "UI Components",
+          "status": "FAIL",
+          "details": "Only 0/7 components passed (0.0%)",
+          "duration": 0.003948211669921875,
+          "timestamp": "2025-09-22T11:53:16.421554"
+        },
+        {
+          "test": "Frontend Routing",
+          "status": "PASS",
+          "details": "Found 6/6 routes",
+          "duration": 0.00040912628173828125,
+          "timestamp": "2025-09-22T11:53:16.422262"
+        },
+        {
+          "test": "API Integration",
+          "status": "PASS",
+          "details": "Found 4/4 API files",
+          "duration": 0.00020766258239746094,
+          "timestamp": "2025-09-22T11:53:16.422963"
+        },
+        {
+          "test": "Responsive Design",
+          "status": "PASS",
+          "details": "Found 2 responsive indicators",
+          "duration": 0.005068302154541016,
+          "timestamp": "2025-09-22T11:53:16.428287"
+        }
+      ]
+    },
+    "backend": {
+      "total_tests": 10,
+      "passed_tests": 8,
+      "success_rate": 80.0,
+      "duration": 0.5881614685058594,
+      "results": [
+        {
+          "test": "Server Health",
+          "status": "PASS",
+          "details": "Server is healthy",
+          "duration": 0.016696453094482422,
+          "timestamp": "2025-09-22T11:52:53.805512"
+        },
+        {
+          "test": "API Documentation",
+          "status": "PASS",
+          "details": "Swagger UI accessible",
+          "duration": 0.0028252601623535156,
+          "timestamp": "2025-09-22T11:52:53.809324"
+        },
+        {
+          "test": "Authentication",
+          "status": "FAIL",
+          "details": "Login failed with status 500",
+          "duration": 0.3896048069000244,
+          "timestamp": "2025-09-22T11:52:54.199483"
+        },
+        {
+          "test": "GET /crews",
+          "status": "PASS",
+          "details": "Retrieved 5 crew members",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.217581"
+        },
+        {
+          "test": "GET /crews/{id}",
+          "status": "PASS",
+          "details": "Retrieved specific crew member",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.229329"
+        },
+        {
+          "test": "Crew Endpoints",
+          "status": "PASS",
+          "details": "All crew endpoints working",
+          "duration": 0.029422283172607422,
+          "timestamp": "2025-09-22T11:52:54.229693"
+        },
+        {
+          "test": "GET /flights",
+          "status": "PASS",
+          "details": "Retrieved 5 flights",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.245198"
+        },
+        {
+          "test": "GET /flights/{id}",
+          "status": "PASS",
+          "details": "Retrieved specific flight",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.254466"
+        },
+        {
+          "test": "Flight Endpoints",
+          "status": "PASS",
+          "details": "All flight endpoints working",
+          "duration": 0.024454116821289062,
+          "timestamp": "2025-09-22T11:52:54.254750"
+        },
+        {
+          "test": "GET /rosters",
+          "status": "PASS",
+          "details": "Retrieved 5 roster assignments",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.287254"
+        },
+        {
+          "test": "Roster Endpoints",
+          "status": "PASS",
+          "details": "All roster endpoints working",
+          "duration": 0.03242206573486328,
+          "timestamp": "2025-09-22T11:52:54.287656"
+        },
+        {
+          "test": "GET /disruptions",
+          "status": "PASS",
+          "details": "Retrieved 5 disruptions",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.302475"
+        },
+        {
+          "test": "Disruption Endpoints",
+          "status": "PASS",
+          "details": "All disruption endpoints working",
+          "duration": 0.014457464218139648,
+          "timestamp": "2025-09-22T11:52:54.302909"
+        },
+        {
+          "test": "GET /jobs",
+          "status": "FAIL",
+          "details": "GET /jobs failed with status 404",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.306836"
+        },
+        {
+          "test": "404 Error Handling",
+          "status": "PASS",
+          "details": "Correctly returns 404 for non-existent resource",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.319148"
+        },
+        {
+          "test": "Error Handling",
+          "status": "PASS",
+          "details": "All error handling working",
+          "duration": 0.012240409851074219,
+          "timestamp": "2025-09-22T11:52:54.319643"
+        },
+        {
+          "test": "Performance /health",
+          "status": "PASS",
+          "details": "Response time: 0.004s",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.324482"
+        },
+        {
+          "test": "Performance /crews?limit=10",
+          "status": "PASS",
+          "details": "Response time: 0.012s",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.337263"
+        },
+        {
+          "test": "Performance /flights?limit=10",
+          "status": "PASS",
+          "details": "Response time: 0.012s",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.349231"
+        },
+        {
+          "test": "Performance /rosters?limit=10",
+          "status": "PASS",
+          "details": "Response time: 0.026s",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:52:54.375993"
+        },
+        {
+          "test": "API Performance",
+          "status": "PASS",
+          "details": "4/4 endpoints met performance criteria",
+          "duration": 0.056127071380615234,
+          "timestamp": "2025-09-22T11:52:54.376295"
+        }
+      ]
+    },
+    "database": {
+      "total_tests": 7,
+      "passed_tests": 0,
+      "success_rate": 0.0,
+      "duration": 0.27927684783935547,
+      "results": [
+        {
+          "test": "Database Connection",
+          "status": "FAIL",
+          "details": "Connection error: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:54:25.877721"
+        },
+        {
+          "test": "Table Structure",
+          "status": "FAIL",
+          "details": "Table structure error: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:54:25.878995"
+        },
+        {
+          "test": "Data Integrity",
+          "status": "FAIL",
+          "details": "Data integrity error: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:54:25.880244"
+        },
+        {
+          "test": "CRUD Operations",
+          "status": "FAIL",
+          "details": "Only 0/3 operations successful",
+          "duration": 0.26366281509399414,
+          "timestamp": "2025-09-22T11:54:26.144863"
+        },
+        {
+          "test": "Database Relationships",
+          "status": "FAIL",
+          "details": "Relationship test error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8) (Background on this error at: https://sqlalche.me/e/20/7s2a)",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:54:26.145366"
+        },
+        {
+          "test": "Database Performance",
+          "status": "FAIL",
+          "details": "Performance test error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8) (Background on this error at: https://sqlalche.me/e/20/7s2a)",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:54:26.145826"
+        },
+        {
+          "test": "Database Transactions",
+          "status": "FAIL",
+          "details": "Only 0/2 transaction tests passed",
+          "duration": 0.002595663070678711,
+          "timestamp": "2025-09-22T11:54:26.149030"
+        },
+        {
+          "test": "Cleanup",
+          "status": "WARN",
+          "details": "Cleanup error: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+          "duration": 0,
+          "timestamp": "2025-09-22T11:54:26.150065"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "overall_status": "FAIL",
+    "recommendations": [
+      "Overall test success rate is below 80% - review failed tests",
+      "Failed test suites: frontend, backend, database, e2e, disruption, ai_stress",
+      "Frontend issues detected - check UI components and build process",
+      "Backend issues detected - check API endpoints and server configuration",
+      "Database issues detected - check schema and data integrity",
+      "End-to-end issues detected - check system integration",
+      "Disruption handling issues detected - check disruption management system",
+      "AI/Stress test issues detected - check system performance and AI functionality"
+    ],
+    "next_steps": [
+      "Test results need improvement - fix critical issues before proceeding"
+    ]
+  }
+}

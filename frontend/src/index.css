@@ -1,0 +1,311 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Aviation-inspired Glassmorphism Design System
+All colors MUST be HSL for proper glass effects and theming.
+*/
+
+@layer base {
+  :root {
+    /* Core Backgrounds */
+    --background: 210 20% 98%;
+    --foreground: 215 25% 12%;
+
+    /* Glass Surface Colors */
+    --card: 210 40% 99%;
+    --card-foreground: 215 25% 12%;
+    --glass-surface: 210 40% 99%;
+    --glass-border: 210 20% 85%;
+
+    /* Popover Colors */
+    --popover: 210 40% 99%;
+    --popover-foreground: 215 25% 12%;
+
+    /* Aviation Brand Colors */
+    --primary: 215 100% 45%;        /* Deep aviation blue */
+    --primary-foreground: 210 40% 98%;
+    --primary-glow: 215 100% 55%;   /* Lighter blue for glows */
+
+    /* Secondary Aviation Colors */
+    --secondary: 210 25% 93%;
+    --secondary-foreground: 215 25% 12%;
+
+    /* Muted Colors */
+    --muted: 210 25% 93%;
+    --muted-foreground: 215 15% 55%;
+
+    /* Accent Colors - Aviation Orange */
+    --accent: 25 100% 55%;           /* Flight status orange */
+    --accent-foreground: 210 40% 98%;
+
+    /* Status Colors */
+    --destructive: 0 85% 60%;
+    --destructive-foreground: 210 40% 98%;
+    --success: 145 75% 42%;
+    --success-foreground: 210 40% 98%;
+    --warning: 45 100% 55%;
+    --warning-foreground: 215 25% 12%;
+
+    /* Interactive Elements */
+    --border: 210 20% 85%;
+    --input: 210 25% 93%;
+    --ring: 215 100% 45%;
+
+    /* Enhanced Glass Effects */
+    --glass-blur: blur(16px);
+    --glass-opacity: 0.1;
+    --glass-border-opacity: 0.15;
+
+    /* Shadows & Glows */
+    --shadow-glass: 0 8px 32px -8px hsl(215 100% 45% / 0.1);
+    --shadow-elevated: 0 20px 48px -12px hsl(215 100% 45% / 0.15);
+    --shadow-neumorphic: 8px 8px 16px hsl(210 15% 85%), -8px -8px 16px hsl(210 40% 99%);
+    --shadow-inset: inset 4px 4px 8px hsl(210 15% 85%), inset -4px -4px 8px hsl(210 40% 99%);
+
+    /* Animation Properties */
+    --transition-smooth: all 0.22s cubic-bezier(0.2, 0.9, 0.3, 1);
+    --transition-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-glass: linear-gradient(135deg, 
+                      hsl(var(--glass-surface) / var(--glass-opacity)),
+                      hsl(var(--glass-surface) / calc(var(--glass-opacity) * 0.5)));
+    --gradient-sky: linear-gradient(180deg, 
+                    hsl(215 100% 95%), 
+                    hsl(210 40% 98%));
+
+    /* Spacing & Sizing */
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    /* Core Backgrounds */
+    --background: 215 25% 8%;
+    --foreground: 210 40% 95%;
+
+    /* Glass Surface Colors */
+    --card: 215 25% 10%;
+    --card-foreground: 210 40% 95%;
+    --glass-surface: 215 25% 15%;
+    --glass-border: 215 20% 25%;
+
+    /* Popover Colors */
+    --popover: 215 25% 10%;
+    --popover-foreground: 210 40% 95%;
+
+    /* Aviation Brand Colors */
+    --primary: 215 100% 60%;
+    --primary-foreground: 215 25% 8%;
+    --primary-glow: 215 100% 70%;
+
+    /* Secondary Colors */
+    --secondary: 215 20% 18%;
+    --secondary-foreground: 210 40% 95%;
+
+    /* Muted Colors */
+    --muted: 215 20% 18%;
+    --muted-foreground: 215 15% 65%;
+
+    /* Accent Colors */
+    --accent: 25 100% 60%;
+    --accent-foreground: 215 25% 8%;
+
+    /* Status Colors */
+    --destructive: 0 85% 65%;
+    --destructive-foreground: 215 25% 8%;
+    --success: 145 75% 50%;
+    --success-foreground: 215 25% 8%;
+    --warning: 45 100% 60%;
+    --warning-foreground: 215 25% 8%;
+
+    /* Interactive Elements */
+    --border: 215 20% 25%;
+    --input: 215 20% 18%;
+    --ring: 215 100% 60%;
+
+    /* Enhanced Glass Effects */
+    --glass-opacity: 0.08;
+    --glass-border-opacity: 0.12;
+
+    /* Shadows & Glows */
+    --shadow-glass: 0 8px 32px -8px hsl(215 100% 5% / 0.4);
+    --shadow-elevated: 0 20px 48px -12px hsl(215 100% 5% / 0.6);
+    --shadow-neumorphic: 8px 8px 16px hsl(215 25% 5%), -8px -8px 16px hsl(215 25% 12%);
+    --shadow-inset: inset 4px 4px 8px hsl(215 25% 5%), inset -4px -4px 8px hsl(215 25% 12%);
+
+    /* Gradients */
+    --gradient-glass: linear-gradient(135deg, 
+                      hsl(var(--glass-surface) / var(--glass-opacity)),
+                      hsl(var(--glass-surface) / calc(var(--glass-opacity) * 0.3)));
+    --gradient-sky: linear-gradient(180deg, 
+                    hsl(215 25% 12%), 
+                    hsl(215 25% 8%));
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background: var(--gradient-sky);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Enhanced Glassmorphism Utilities */
+  .glass {
+    background: var(--gradient-glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid hsl(var(--glass-border) / var(--glass-border-opacity));
+    box-shadow: var(--shadow-glass);
+    position: relative;
+  }
+
+  .glass::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, 
+      hsl(var(--glass-border) / 0.2),
+      transparent 50%,
+      hsl(var(--glass-border) / 0.1)
+    );
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl;
+    background: linear-gradient(135deg, 
+      hsl(var(--glass-surface) / 0.1),
+      hsl(var(--glass-surface) / 0.05)
+    );
+  }
+
+  .glass-button {
+    @apply glass rounded-xl transition-all duration-300;
+    background: linear-gradient(135deg, 
+      hsl(var(--glass-surface) / 0.08),
+      hsl(var(--glass-surface) / 0.04)
+    );
+    &:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: var(--shadow-elevated);
+      background: linear-gradient(135deg, 
+        hsl(var(--glass-surface) / 0.12),
+        hsl(var(--glass-surface) / 0.08)
+      );
+    }
+    &:active {
+      transform: translateY(-1px) scale(1.01);
+    }
+  }
+
+  /* Neumorphism Utilities */
+  .neumorphic {
+    background: hsl(var(--background));
+    box-shadow: var(--shadow-neumorphic);
+  }
+
+  .neumorphic-inset {
+    background: hsl(var(--background));
+    box-shadow: var(--shadow-inset);
+  }
+
+  /* Enhanced Smooth Interactions */
+  .smooth-hover {
+    transition: var(--transition-smooth);
+    &:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: var(--shadow-elevated);
+    }
+  }
+
+  .bounce-hover {
+    transition: var(--transition-bounce);
+    &:hover {
+      transform: scale(1.05) translateY(-2px);
+      box-shadow: var(--shadow-glass);
+    }
+  }
+
+  /* Glass Surface Variants */
+  .glass-surface-subtle {
+    background: linear-gradient(135deg, 
+      hsl(var(--background) / 0.6),
+      hsl(var(--background) / 0.4)
+    );
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid hsl(var(--border) / 0.1);
+  }
+
+  .glass-surface-prominent {
+    background: linear-gradient(135deg, 
+      hsl(var(--glass-surface) / 0.15),
+      hsl(var(--glass-surface) / 0.08)
+    );
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--glass-border) / 0.2);
+    box-shadow: 
+      var(--shadow-glass),
+      inset 0 1px 0 hsl(var(--foreground) / 0.1);
+  }
+
+  /* Custom Scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+}

@@ -1,0 +1,191 @@
+[
+  {
+    "id": "flight-001",
+    "flightNumber": "6E-2041",
+    "aircraftType": "A320",
+    "route": {
+      "origin": "DEL",
+      "destination": "BOM",
+      "originName": "Delhi",
+      "destinationName": "Mumbai"
+    },
+    "schedule": {
+      "departureTime": "2024-12-16T06:30:00Z",
+      "arrivalTime": "2024-12-16T08:45:00Z",
+      "duration": 135
+    },
+    "crew": {
+      "required": {
+        "captain": 1,
+        "firstOfficer": 1,
+        "flightAttendant": 3
+      },
+      "assigned": {
+        "captain": "crew-001",
+        "firstOfficer": "crew-002",
+        "flightAttendant": ["crew-004"]
+      }
+    },
+    "status": "scheduled",
+    "gate": "A12",
+    "aircraft": "VT-IFG"
+  },
+  {
+    "id": "flight-002",
+    "flightNumber": "6E-2142",
+    "aircraftType": "A320",
+    "route": {
+      "origin": "BOM",
+      "destination": "BLR",
+      "originName": "Mumbai",
+      "destinationName": "Bangalore"
+    },
+    "schedule": {
+      "departureTime": "2024-12-16T10:15:00Z",
+      "arrivalTime": "2024-12-16T11:30:00Z",
+      "duration": 75
+    },
+    "crew": {
+      "required": {
+        "captain": 1,
+        "firstOfficer": 1,
+        "flightAttendant": 3
+      },
+      "assigned": {
+        "captain": null,
+        "firstOfficer": null,
+        "flightAttendant": []
+      }
+    },
+    "status": "unassigned",
+    "gate": "B08",
+    "aircraft": "VT-IFH"
+  },
+  {
+    "id": "flight-003",
+    "flightNumber": "6E-5047",
+    "aircraftType": "A321",
+    "route": {
+      "origin": "DEL",
+      "destination": "HYD",
+      "originName": "Delhi",
+      "destinationName": "Hyderabad"
+    },
+    "schedule": {
+      "departureTime": "2024-12-16T14:20:00Z",
+      "arrivalTime": "2024-12-16T16:40:00Z",
+      "duration": 140
+    },
+    "crew": {
+      "required": {
+        "captain": 1,
+        "firstOfficer": 1,
+        "flightAttendant": 4
+      },
+      "assigned": {
+        "captain": "crew-003",
+        "firstOfficer": null,
+        "flightAttendant": ["crew-006"]
+      }
+    },
+    "status": "partially_assigned",
+    "gate": "C15",
+    "aircraft": "VT-IJK"
+  },
+  {
+    "id": "flight-004",
+    "flightNumber": "6E-3251",
+    "aircraftType": "A320",
+    "route": {
+      "origin": "BLR",
+      "destination": "CCU",
+      "originName": "Bangalore",
+      "destinationName": "Kolkata"
+    },
+    "schedule": {
+      "departureTime": "2024-12-16T18:45:00Z",
+      "arrivalTime": "2024-12-16T21:15:00Z",
+      "duration": 150
+    },
+    "crew": {
+      "required": {
+        "captain": 1,
+        "firstOfficer": 1,
+        "flightAttendant": 3
+      },
+      "assigned": {
+        "captain": null,
+        "firstOfficer": null,
+        "flightAttendant": []
+      }
+    },
+    "status": "delayed",
+    "gate": "D09",
+    "aircraft": "VT-IFL",
+    "delayReason": "weather",
+    "estimatedDeparture": "2024-12-16T20:30:00Z"
+  },
+  {
+    "id": "flight-005",
+    "flightNumber": "6E-1174",
+    "aircraftType": "A320",
+    "route": {
+      "origin": "GOI",
+      "destination": "DEL",
+      "originName": "Goa",
+      "destinationName": "Delhi"
+    },
+    "schedule": {
+      "departureTime": "2024-12-16T12:00:00Z",
+      "arrivalTime": "2024-12-16T14:30:00Z",
+      "duration": 150
+    },
+    "crew": {
+      "required": {
+        "captain": 1,
+        "firstOfficer": 1,
+        "flightAttendant": 3
+      },
+      "assigned": {
+        "captain": "crew-001",
+        "firstOfficer": "crew-002",
+        "flightAttendant": ["crew-004", "crew-006"]
+      }
+    },
+    "status": "scheduled",
+    "gate": "E07",
+    "aircraft": "VT-IFM"
+  },
+  {
+    "id": "flight-006",
+    "flightNumber": "6E-6784",
+    "aircraftType": "A321",
+    "route": {
+      "origin": "HYD",
+      "destination": "BOM",
+      "originName": "Hyderabad",
+      "destinationName": "Mumbai"
+    },
+    "schedule": {
+      "departureTime": "2024-12-16T20:15:00Z",
+      "arrivalTime": "2024-12-16T21:30:00Z",
+      "duration": 75
+    },
+    "crew": {
+      "required": {
+        "captain": 1,
+        "firstOfficer": 1,
+        "flightAttendant": 4
+      },
+      "assigned": {
+        "captain": null,
+        "firstOfficer": null,
+        "flightAttendant": []
+      }
+    },
+    "status": "cancelled",
+    "gate": null,
+    "aircraft": "VT-IJL",
+    "cancellationReason": "technical"
+  }
+]

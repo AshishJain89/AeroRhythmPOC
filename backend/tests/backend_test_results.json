@@ -1,0 +1,155 @@
+{
+  "total_tests": 10,
+  "passed_tests": 8,
+  "success_rate": 80.0,
+  "duration": 0.5881614685058594,
+  "results": [
+    {
+      "test": "Server Health",
+      "status": "PASS",
+      "details": "Server is healthy",
+      "duration": 0.016696453094482422,
+      "timestamp": "2025-09-22T11:52:53.805512"
+    },
+    {
+      "test": "API Documentation",
+      "status": "PASS",
+      "details": "Swagger UI accessible",
+      "duration": 0.0028252601623535156,
+      "timestamp": "2025-09-22T11:52:53.809324"
+    },
+    {
+      "test": "Authentication",
+      "status": "FAIL",
+      "details": "Login failed with status 500",
+      "duration": 0.3896048069000244,
+      "timestamp": "2025-09-22T11:52:54.199483"
+    },
+    {
+      "test": "GET /crews",
+      "status": "PASS",
+      "details": "Retrieved 5 crew members",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.217581"
+    },
+    {
+      "test": "GET /crews/{id}",
+      "status": "PASS",
+      "details": "Retrieved specific crew member",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.229329"
+    },
+    {
+      "test": "Crew Endpoints",
+      "status": "PASS",
+      "details": "All crew endpoints working",
+      "duration": 0.029422283172607422,
+      "timestamp": "2025-09-22T11:52:54.229693"
+    },
+    {
+      "test": "GET /flights",
+      "status": "PASS",
+      "details": "Retrieved 5 flights",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.245198"
+    },
+    {
+      "test": "GET /flights/{id}",
+      "status": "PASS",
+      "details": "Retrieved specific flight",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.254466"
+    },
+    {
+      "test": "Flight Endpoints",
+      "status": "PASS",
+      "details": "All flight endpoints working",
+      "duration": 0.024454116821289062,
+      "timestamp": "2025-09-22T11:52:54.254750"
+    },
+    {
+      "test": "GET /rosters",
+      "status": "PASS",
+      "details": "Retrieved 5 roster assignments",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.287254"
+    },
+    {
+      "test": "Roster Endpoints",
+      "status": "PASS",
+      "details": "All roster endpoints working",
+      "duration": 0.03242206573486328,
+      "timestamp": "2025-09-22T11:52:54.287656"
+    },
+    {
+      "test": "GET /disruptions",
+      "status": "PASS",
+      "details": "Retrieved 5 disruptions",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.302475"
+    },
+    {
+      "test": "Disruption Endpoints",
+      "status": "PASS",
+      "details": "All disruption endpoints working",
+      "duration": 0.014457464218139648,
+      "timestamp": "2025-09-22T11:52:54.302909"
+    },
+    {
+      "test": "GET /jobs",
+      "status": "FAIL",
+      "details": "GET /jobs failed with status 404",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.306836"
+    },
+    {
+      "test": "404 Error Handling",
+      "status": "PASS",
+      "details": "Correctly returns 404 for non-existent resource",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.319148"
+    },
+    {
+      "test": "Error Handling",
+      "status": "PASS",
+      "details": "All error handling working",
+      "duration": 0.012240409851074219,
+      "timestamp": "2025-09-22T11:52:54.319643"
+    },
+    {
+      "test": "Performance /health",
+      "status": "PASS",
+      "details": "Response time: 0.004s",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.324482"
+    },
+    {
+      "test": "Performance /crews?limit=10",
+      "status": "PASS",
+      "details": "Response time: 0.012s",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.337263"
+    },
+    {
+      "test": "Performance /flights?limit=10",
+      "status": "PASS",
+      "details": "Response time: 0.012s",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.349231"
+    },
+    {
+      "test": "Performance /rosters?limit=10",
+      "status": "PASS",
+      "details": "Response time: 0.026s",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:52:54.375993"
+    },
+    {
+      "test": "API Performance",
+      "status": "PASS",
+      "details": "4/4 endpoints met performance criteria",
+      "duration": 0.056127071380615234,
+      "timestamp": "2025-09-22T11:52:54.376295"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "total_tests": 6,
+  "passed_tests": 3,
+  "success_rate": 50.0,
+  "duration": 0.022644996643066406,
+  "results": [
+    {
+      "test": "Frontend Build",
+      "status": "FAIL",
+      "details": "Build error: [WinError 2] The system cannot find the file specified",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.413781"
+    },
+    {
+      "test": "Frontend Dev Server",
+      "status": "FAIL",
+      "details": "Server start error: [WinError 2] The system cannot find the file specified",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.417117"
+    },
+    {
+      "test": "Component AppShell",
+      "status": "FAIL",
+      "details": "Failed checks: Component has JSX",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.418028"
+    },
+    {
+      "test": "Component Header",
+      "status": "FAIL",
+      "details": "Failed checks: Component has JSX",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.418770"
+    },
+    {
+      "test": "Component Sidebar",
+      "status": "FAIL",
+      "details": "Failed checks: Component has JSX",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.419509"
+    },
+    {
+      "test": "Component CrewCard",
+      "status": "FAIL",
+      "details": "Component file not found",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.419886"
+    },
+    {
+      "test": "Component DisruptionsFeed",
+      "status": "FAIL",
+      "details": "Failed checks: Component has JSX",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.420710"
+    },
+    {
+      "test": "Component SearchBar",
+      "status": "FAIL",
+      "details": "Component file not found",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.421095"
+    },
+    {
+      "test": "Component TimelineView",
+      "status": "FAIL",
+      "details": "Component file not found",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:53:16.421362"
+    },
+    {
+      "test": "UI Components",
+      "status": "FAIL",
+      "details": "Only 0/7 components passed (0.0%)",
+      "duration": 0.003948211669921875,
+      "timestamp": "2025-09-22T11:53:16.421554"
+    },
+    {
+      "test": "Frontend Routing",
+      "status": "PASS",
+      "details": "Found 6/6 routes",
+      "duration": 0.00040912628173828125,
+      "timestamp": "2025-09-22T11:53:16.422262"
+    },
+    {
+      "test": "API Integration",
+      "status": "PASS",
+      "details": "Found 4/4 API files",
+      "duration": 0.00020766258239746094,
+      "timestamp": "2025-09-22T11:53:16.422963"
+    },
+    {
+      "test": "Responsive Design",
+      "status": "PASS",
+      "details": "Found 2 responsive indicators",
+      "duration": 0.005068302154541016,
+      "timestamp": "2025-09-22T11:53:16.428287"
+    }
+  ]
+}

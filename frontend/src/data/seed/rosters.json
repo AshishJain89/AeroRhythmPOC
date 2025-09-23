@@ -1,0 +1,134 @@
+[
+  {
+    "id": "roster-001",
+    "crewId": "crew-001",
+    "flightId": "flight-001",
+    "position": "captain",
+    "startTime": "2024-12-16T05:30:00Z",
+    "endTime": "2024-12-16T09:45:00Z",
+    "status": "confirmed",
+    "dutyType": "flight",
+    "confidence": 0.92,
+    "metadata": {
+      "briefingTime": "2024-12-16T05:30:00Z",
+      "reportingTime": "2024-12-16T06:00:00Z",
+      "estimatedBlockTime": 135,
+      "restPeriodBefore": 12,
+      "restPeriodAfter": 14
+    },
+    "violations": [],
+    "aiExplanation": "Optimal assignment based on crew qualification (A320 certified), base proximity (DEL), and duty time compliance. Crew has adequate rest before and after duty."
+  },
+  {
+    "id": "roster-002",
+    "crewId": "crew-002",
+    "flightId": "flight-001",
+    "position": "firstOfficer",
+    "startTime": "2024-12-16T05:30:00Z",
+    "endTime": "2024-12-16T09:45:00Z",
+    "status": "confirmed",
+    "dutyType": "flight",
+    "confidence": 0.89,
+    "metadata": {
+      "briefingTime": "2024-12-16T05:30:00Z",
+      "reportingTime": "2024-12-16T06:00:00Z",
+      "estimatedBlockTime": 135,
+      "restPeriodBefore": 14,
+      "restPeriodAfter": 12
+    },
+    "violations": [],
+    "aiExplanation": "Good pairing with experienced captain. Flight route aligns with crew preferences (BOM-DEL corridor). Within duty time limits."
+  },
+  {
+    "id": "roster-003",
+    "crewId": "crew-004",
+    "flightId": "flight-001",
+    "position": "flightAttendant",
+    "startTime": "2024-12-16T05:30:00Z",
+    "endTime": "2024-12-16T09:45:00Z",
+    "status": "confirmed",
+    "dutyType": "flight",
+    "confidence": 0.95,
+    "metadata": {
+      "briefingTime": "2024-12-16T05:45:00Z",
+      "reportingTime": "2024-12-16T06:00:00Z",
+      "estimatedBlockTime": 135,
+      "restPeriodBefore": 10,
+      "restPeriodAfter": 16
+    },
+    "violations": [],
+    "aiExplanation": "Crew member has current safety training and medical certification. Base transfer accommodated for operational needs."
+  },
+  {
+    "id": "roster-004",
+    "crewId": "crew-003",
+    "flightId": "flight-003",
+    "position": "captain",
+    "startTime": "2024-12-16T13:20:00Z",
+    "endTime": "2024-12-16T17:40:00Z",
+    "status": "tentative",
+    "dutyType": "flight",
+    "confidence": 0.65,
+    "metadata": {
+      "briefingTime": "2024-12-16T13:20:00Z",
+      "reportingTime": "2024-12-16T13:50:00Z",
+      "estimatedBlockTime": 140,
+      "restPeriodBefore": 18,
+      "restPeriodAfter": 14
+    },
+    "violations": [
+      {
+        "type": "crew_availability",
+        "severity": "medium",
+        "description": "Crew currently on leave until 2024-12-22",
+        "recommendation": "Find alternate captain or reschedule flight"
+      }
+    ],
+    "aiExplanation": "Assignment requires crew return from leave early. Alternative captains should be considered to maintain schedule integrity."
+  },
+  {
+    "id": "roster-005",
+    "crewId": "crew-006",
+    "flightId": "flight-003",
+    "position": "flightAttendant",
+    "startTime": "2024-12-16T13:20:00Z",
+    "endTime": "2024-12-16T17:40:00Z",
+    "status": "confirmed",
+    "dutyType": "flight",
+    "confidence": 0.88,
+    "metadata": {
+      "briefingTime": "2024-12-16T13:35:00Z",
+      "reportingTime": "2024-12-16T13:50:00Z",
+      "estimatedBlockTime": 140,
+      "restPeriodBefore": 18,
+      "restPeriodAfter": 12
+    },
+    "violations": [],
+    "aiExplanation": "Experienced flight attendant with first aid certification. Route preference alignment (DEL corridor). Duty time within DGCA limits."
+  },
+  {
+    "id": "roster-006",
+    "crewId": "crew-005",
+    "flightId": null,
+    "position": "standby",
+    "startTime": "2024-12-16T08:00:00Z",
+    "endTime": "2024-12-16T16:00:00Z",
+    "status": "on_sick_leave",
+    "dutyType": "standby",
+    "confidence": 0.0,
+    "metadata": {
+      "standbyLocation": "CCU",
+      "availableUntil": "2024-12-18T09:00:00Z",
+      "replacementNeeded": true
+    },
+    "violations": [
+      {
+        "type": "crew_unavailable",
+        "severity": "high",
+        "description": "Crew on sick leave, not available for duty",
+        "recommendation": "Assign alternate First Officer from CCU base"
+      }
+    ],
+    "aiExplanation": "Crew unavailable due to medical reasons. Standby crew from same base should be activated for operational continuity."
+  }
+]

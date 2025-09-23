@@ -1,0 +1,152 @@
+[
+  {
+    "id": "crew-001",
+    "employeeNumber": "IN001234",
+    "firstName": "Rajesh",
+    "lastName": "Sharma",
+    "position": "Captain",
+    "homeBase": "DEL",
+    "qualifications": ["A320", "A321"],
+    "licenseExpiry": "2025-06-15",
+    "medicalExpiry": "2025-03-20",
+    "totalHours": 8500,
+    "recentHours": 85,
+    "status": "available",
+    "preferences": {
+      "preferredRoutes": ["DEL-BOM", "DEL-BLR"],
+      "avoidNightFlights": false,
+      "requestedDaysOff": ["2024-12-25", "2024-12-26"]
+    },
+    "dutyHistory": {
+      "currentWeekHours": 28,
+      "currentMonthHours": 92,
+      "lastRestPeriod": "2024-12-14T22:00:00Z",
+      "nextDutyStart": "2024-12-16T06:00:00Z"
+    }
+  },
+  {
+    "id": "crew-002",
+    "employeeNumber": "IN001456",
+    "firstName": "Priya",
+    "lastName": "Patel",
+    "position": "First Officer",
+    "homeBase": "BOM",
+    "qualifications": ["A320", "A321"],
+    "licenseExpiry": "2025-09-10",
+    "medicalExpiry": "2025-04-15",
+    "totalHours": 3200,
+    "recentHours": 76,
+    "status": "available",
+    "preferences": {
+      "preferredRoutes": ["BOM-DEL", "BOM-GOI"],
+      "avoidNightFlights": true,
+      "requestedDaysOff": ["2024-12-31", "2025-01-01"]
+    },
+    "dutyHistory": {
+      "currentWeekHours": 32,
+      "currentMonthHours": 88,
+      "lastRestPeriod": "2024-12-14T20:00:00Z",
+      "nextDutyStart": "2024-12-16T08:00:00Z"
+    }
+  },
+  {
+    "id": "crew-003",
+    "employeeNumber": "IN001789",
+    "firstName": "Amit",
+    "lastName": "Singh",
+    "position": "Captain",
+    "homeBase": "BLR",
+    "qualifications": ["A320", "A321", "A330"],
+    "licenseExpiry": "2025-11-30",
+    "medicalExpiry": "2025-05-20",
+    "totalHours": 12500,
+    "recentHours": 95,
+    "status": "on_leave",
+    "preferences": {
+      "preferredRoutes": ["BLR-DEL", "BLR-BOM"],
+      "avoidNightFlights": false,
+      "requestedDaysOff": ["2024-12-20", "2024-12-21", "2024-12-22"]
+    },
+    "dutyHistory": {
+      "currentWeekHours": 0,
+      "currentMonthHours": 65,
+      "lastRestPeriod": "2024-12-12T18:00:00Z",
+      "nextDutyStart": "2024-12-23T10:00:00Z"
+    }
+  },
+  {
+    "id": "crew-004",
+    "employeeNumber": "IN002011",
+    "firstName": "Kavya",
+    "lastName": "Reddy",
+    "position": "Flight Attendant",
+    "homeBase": "HYD",
+    "qualifications": ["A320", "A321", "Safety_Training"],
+    "licenseExpiry": "2025-08-15",
+    "medicalExpiry": "2025-02-28",
+    "totalHours": 2800,
+    "recentHours": 82,
+    "status": "available",
+    "preferences": {
+      "preferredRoutes": ["HYD-DEL", "HYD-BOM"],
+      "avoidNightFlights": false,
+      "requestedDaysOff": ["2024-12-24"]
+    },
+    "dutyHistory": {
+      "currentWeekHours": 30,
+      "currentMonthHours": 90,
+      "lastRestPeriod": "2024-12-14T21:00:00Z",
+      "nextDutyStart": "2024-12-16T07:00:00Z"
+    }
+  },
+  {
+    "id": "crew-005",
+    "employeeNumber": "IN002234",
+    "firstName": "Rohit",
+    "lastName": "Kumar",
+    "position": "First Officer",
+    "homeBase": "CCU",
+    "qualifications": ["A320"],
+    "licenseExpiry": "2025-07-22",
+    "medicalExpiry": "2025-01-15",
+    "totalHours": 1850,
+    "recentHours": 68,
+    "status": "sick_leave",
+    "preferences": {
+      "preferredRoutes": ["CCU-DEL", "CCU-BOM"],
+      "avoidNightFlights": true,
+      "requestedDaysOff": []
+    },
+    "dutyHistory": {
+      "currentWeekHours": 0,
+      "currentMonthHours": 52,
+      "lastRestPeriod": "2024-12-11T16:00:00Z",
+      "nextDutyStart": "2024-12-18T09:00:00Z"
+    }
+  },
+  {
+    "id": "crew-006",
+    "employeeNumber": "IN002567",
+    "firstName": "Anjali",
+    "lastName": "Gupta",
+    "position": "Flight Attendant",
+    "homeBase": "DEL",
+    "qualifications": ["A320", "A321", "Safety_Training", "First_Aid"],
+    "licenseExpiry": "2025-10-05",
+    "medicalExpiry": "2025-04-30",
+    "totalHours": 4200,
+    "recentHours": 88,
+    "status": "available",
+    "preferences": {
+      "preferredRoutes": ["DEL-BOM", "DEL-GOA"],
+      "avoidNightFlights": false,
+      "requestedDaysOff": ["2024-12-31"]
+    },
+    "dutyHistory": {
+      "currentWeekHours": 34,
+      "currentMonthHours": 96,
+      "lastRestPeriod": "2024-12-14T19:00:00Z",
+      "nextDutyStart": "2024-12-16T06:30:00Z"
+    }
+  }
+]

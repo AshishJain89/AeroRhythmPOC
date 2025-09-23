@@ -1,0 +1,9 @@
+Audit started: Mon, Sep 22, 2025  2:31:18 PM
+Project dir: /c/Users/ashish.jain/Documents/Projects/AeroRhythmPOC/frontend
+OUTDIR: /c/Users/ashish.jain/Documents/Projects/AeroRhythmPOC/frontend/audit-output/20250922_143118
+Found package.json at: /c/Users/ashish.jain/Documents/Projects/AeroRhythmPOC/frontend/node_modules/acorn/package.json
+Using FRONTEND_DIR: /c/Users/ashish.jain/Documents/Projects/AeroRhythmPOC/frontend/node_modules/acorn
+Node: v22.18.0
+NPM: 10.9.3
+No lockfile: running npm install...
+Audit finished. ZIP: /c/Users/ashish.jain/Documents/Projects/AeroRhythmPOC/frontend/audit-report-20250922_143118.zip

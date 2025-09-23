@@ -1,0 +1,64 @@
+{
+  "total_tests": 7,
+  "passed_tests": 0,
+  "success_rate": 0.0,
+  "duration": 0.27927684783935547,
+  "results": [
+    {
+      "test": "Database Connection",
+      "status": "FAIL",
+      "details": "Connection error: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:54:25.877721"
+    },
+    {
+      "test": "Table Structure",
+      "status": "FAIL",
+      "details": "Table structure error: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:54:25.878995"
+    },
+    {
+      "test": "Data Integrity",
+      "status": "FAIL",
+      "details": "Data integrity error: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:54:25.880244"
+    },
+    {
+      "test": "CRUD Operations",
+      "status": "FAIL",
+      "details": "Only 0/3 operations successful",
+      "duration": 0.26366281509399414,
+      "timestamp": "2025-09-22T11:54:26.144863"
+    },
+    {
+      "test": "Database Relationships",
+      "status": "FAIL",
+      "details": "Relationship test error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8) (Background on this error at: https://sqlalche.me/e/20/7s2a)",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:54:26.145366"
+    },
+    {
+      "test": "Database Performance",
+      "status": "FAIL",
+      "details": "Performance test error: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8) (Background on this error at: https://sqlalche.me/e/20/7s2a)",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:54:26.145826"
+    },
+    {
+      "test": "Database Transactions",
+      "status": "FAIL",
+      "details": "Only 0/2 transaction tests passed",
+      "duration": 0.002595663070678711,
+      "timestamp": "2025-09-22T11:54:26.149030"
+    },
+    {
+      "test": "Cleanup",
+      "status": "WARN",
+      "details": "Cleanup error: (psycopg2.OperationalError) could not translate host name \"$$3nger@localhost\" to address: Non-recoverable failure in name resolution\n\n(Background on this error at: https://sqlalche.me/e/20/e3q8)",
+      "duration": 0,
+      "timestamp": "2025-09-22T11:54:26.150065"
+    }
+  ]
+}
