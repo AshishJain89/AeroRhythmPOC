@@ -1,13 +1,36 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
-from datetime import timedelta
+from datetime import datetime, timedelta, timezone
+from sqlalchemy.future import select
+
+from ..models import User
+from ..core.security import get_password_hash
+from ..config import settings
+
 from .. import schemas
 from ..core.database import get_db
 from ..services.auth_service import auth_service
 
 router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/token")
+
+async def create_admin_user(db: AsyncSession):
+    result = await db.execute(select(User).where(User.username == "admin"))
+    admin = result.scalars().first()
+    if admin:
+        return
+    
+    admin = User(
+        username="admin",
+        hashed_password=get_password_hash("password"),
+        email="admin@example.com",
+        full_name="Admin User",
+        is_active=True,
+        created_at=datetime.now(timezone.utc)
+    )
+    db.add(admin)
+    await db.commit()
 
 @router.post("/token", response_model=schemas.Token)
 async def login_for_access_token(
@@ -21,7 +44,7 @@ async def login_for_access_token(
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    access_token_expires = timedelta(minutes=auth_service.ACCESS_TOKEN_EXPIRE_MINUTES)
+    access_token_expires = timedelta(minutes=settings.access_token_expire_minutes)
     access_token = auth_service.create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires
     )

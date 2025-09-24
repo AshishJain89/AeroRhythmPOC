@@ -4,6 +4,7 @@ sqlalchemy>=1.4
 asyncpg
 alembic
 pydantic
+pydantic-settings
 python-jose[cryptography]
 passlib[bcrypt]
 python-dotenv
@@ -18,3 +19,4 @@ deap
 openai
 langchain
 pulp
+aiosqlite

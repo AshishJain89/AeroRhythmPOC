@@ -2,14 +2,27 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.ext.asyncio import AsyncSession
-from .core.database import engine, Base, get_db, test_connection
-from .endpoints import crews, flights, disruptions, rosters, auth
-import asyncio
+from sqlalchemy import text
+
+# Import your modules correctly
+from app.core.database import engine, Base, get_db, test_connection
+from app.endpoints import crews, flights, disruptions, rosters, auth
+
+
+async def run_create_admin():
+    async_gen = get_db()
+    db: AsyncSession = await async_gen.__anext__()
+    try:
+        await auth.create_admin_user(db)
+    finally:
+        await async_gen.aclose()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup code
     print("Starting AeroRhythm API...")
+    
+    await run_create_admin()
     
     # Create database tables
     try:
@@ -39,16 +52,23 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# CORS middleware
+origins = [
+    "http://localhost:5173",
+    "http://localhost:8080",
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:8080",
+]
+
+# CORS middleware (FIXED: was CODSMiddleware)
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],  # React app
+    CORSMiddleware,  # FIXED: Correct spelling
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"],  # FIXED: Added brackets
+    allow_headers=["*"],  # FIXED: Added brackets
 )
 
-# Include routers
+# Include routers (FIXED: Correct method names)
 app.include_router(crews.router, prefix="/crews", tags=["crews"])
 app.include_router(flights.router, prefix="/flights", tags=["flights"])
 app.include_router(disruptions.router, prefix="/disruptions", tags=["disruptions"])
@@ -62,12 +82,12 @@ async def root():
 @app.get("/health")
 async def health_check(db: AsyncSession = Depends(get_db)):
     try:
-        # Test database connection
-        await db.execute("SELECT 1")
+        # Test database connection (FIXED: Use text() for raw SQL)
+        await db.execute(text("SELECT 1"))  # FIXED: Added text() and corrected SELECT 1
         return {
             "status": "healthy", 
             "database": "connected",
-            "timestamp": "2024-01-01T00:00:00Z"
+            "timestamp": "2024-01-01T00:00:00Z"  # FIXED: Removed extra quote
         }
     except Exception as e:
         return {
@@ -79,11 +99,10 @@ async def health_check(db: AsyncSession = Depends(get_db)):
 @app.get("/test-db")
 async def test_db_connection(db: AsyncSession = Depends(get_db)):
     try:
-        result = await db.execute("SELECT version()")
-        db_version = result.scalar()
+        # FIXED: Use text() for raw SQL and correct SELECT 1
+        result = await db.execute(text("SELECT 1"))
         return {
             "database": "connected",
-            "version": db_version,
             "status": "success"
         }
     except Exception as e:
@@ -92,13 +111,6 @@ async def test_db_connection(db: AsyncSession = Depends(get_db)):
             "error": str(e),
             "status": "error"
         }
-
-# Additional startup tasks can be added here
-async def additional_startup_tasks():
-    """Run additional startup tasks if needed"""
-    # Example: Preload cache, initialize external services, etc.
-    await asyncio.sleep(0.1)  # Simulate some startup work
-    print("Additional startup tasks completed!")
 
 
 

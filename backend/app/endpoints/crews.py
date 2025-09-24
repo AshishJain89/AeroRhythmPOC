@@ -13,8 +13,11 @@ async def list_crews(
     limit: int = Query(100, ge=1, le=1000),
     db: AsyncSession = Depends(get_db)
 ):
-    crews = await crew_service.get_crews(db, skip=skip, limit=limit)
-    return crews
+    try:
+        crews = await crew_service.get_crews(db, skip=skip, limit=limit)
+        return crews
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Internal server error: {str(e)}")
 
 @router.get("/{crew_id}", response_model=schemas.Crew)
 async def get_crew(crew_id: int, db: AsyncSession = Depends(get_db)):

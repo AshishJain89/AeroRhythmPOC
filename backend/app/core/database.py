@@ -2,26 +2,34 @@ import os
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.pool import NullPool
-from .config import settings
-import asyncio
-from dotenv import load_dotenv
 
-load_dotenv()
+# Use SQLite for quick testing
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./aerorhythm.db")
 
-# Database configuration using settings
-DATABASE_URL = settings.database_url
-
-# Create async engine with better configuration
-engine = create_async_engine(
-    DATABASE_URL,
-    echo=settings.debug,
-    pool_pre_ping=True,
-    pool_recycle=3600,  # Recycle connections after 1 hour
-    pool_size=10,
-    max_overflow=20,
-    # Use NullPool for development to avoid connection issues
-    poolclass=NullPool if settings.debug else None
-)
+try:
+    if DATABASE_URL.startswith("postgresql"):
+        engine = create_async_engine(
+            DATABASE_URL,
+            echo=True,
+            pool_pre_ping=True,
+        )
+    else:
+        # SQLite configuration
+        engine = create_async_engine(
+            DATABASE_URL,
+            echo=True,
+            connect_args={"check_same_thread": False}
+        )
+    
+except Exception as e:
+    print(f"Database engine creation failed: {e}")
+    # Fallback to SQLite
+    DATABASE_URL = "sqlite+aiosqlite:///./aerorhythm.db"
+    engine = create_async_engine(
+        DATABASE_URL,
+        echo=True,
+        connect_args={"check_same_thread": False}
+    )
 
 # Create async session factory
 AsyncSessionLocal = async_sessionmaker(
@@ -46,34 +54,15 @@ async def get_db():
         finally:
             await session.close()
 
-# Test database connection with retry logic
-async def test_connection(max_retries: int = 3, retry_delay: float = 2.0):
-    for attempt in range(max_retries):
-        try:
-            async with engine.begin() as conn:
-                # Test basic connection
-                await conn.execute("SELECT 1")
-                
-                # Create tables if they don't exist
-                await conn.run_sync(Base.metadata.create_all)
-                
-            print(f"Database connection successful! (Attempt {attempt + 1})")
-            return True
-            
-        except Exception as e:
-            print(f"Database connection attempt {attempt + 1} failed: {e}")
-            if attempt < max_retries - 1:
-                print(f"🔄 Retrying in {retry_delay} seconds...")
-                await asyncio.sleep(retry_delay)
-            else:
-                print("All connection attempts failed!")
-                return False
-
-# Graceful shutdown
-async def close_engine():
-    """Close the database engine gracefully"""
-    await engine.dispose()
-    print("Database engine closed gracefully!")
+async def test_connection():
+    try:
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        print("Database connection successful!")
+        return True
+    except Exception as e:
+        print(f"Database connection failed: {e}")
+        return False
 
 
 # from sqlalchemy import create_engine

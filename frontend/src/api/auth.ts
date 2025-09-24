@@ -15,8 +15,14 @@ export interface User {
 
 export const authApi = {
   async login(credentials: LoginCredentials): Promise<AuthToken> {
+    const formData = new URLSearchParams();
+    formData.append('username', credentials.username);
+    formData.append('password', credentials.password);
+
     return apiRequest(() =>
-      apiClient.post<AuthToken>('/auth/token', credentials)
+      apiClient.post<AuthToken>('/auth/token', formData, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      })
     );
   },
 
