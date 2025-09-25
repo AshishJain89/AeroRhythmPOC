@@ -5,50 +5,68 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 
 # Import your modules correctly
-from app.core.database import engine, Base, get_db, test_connection
-from app.endpoints import crews, flights, disruptions, rosters, auth
+from app.core.database import engine, Base, get_db, test_connection, init_db
+# from app.endpoints import crews, flights, disruptions, rosters, auth
+from app.endpoints import async_endpoints
 
 
-async def run_create_admin():
-    async_gen = get_db()
-    db: AsyncSession = await async_gen.__anext__()
-    try:
-        await auth.create_admin_user(db)
-    finally:
-        await async_gen.aclose()
+# async def run_create_admin():
+#     async_gen = get_db()
+#     db: AsyncSession = await async_gen.__anext__()
+#     try:
+#         await auth.create_admin_user(db)
+#     finally:
+#         await async_gen.aclose()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup code
     print("Starting AeroRhythm API...")
     
-    await run_create_admin()
-    
-    # Create database tables
     try:
-        async with engine.begin() as conn:
-            await conn.run_sync(Base.metadata.create_all)
+        await init_db()
         print("Database tables created successfully!")
-        
+
         # Test connection
         if await test_connection():
             print("Database connection verified!")
         else:
             print("Database connection failed!")
-            
     except Exception as e:
         print(f"Startup error: {e}")
-    
-    yield  # This is where the application runs
-    
-    # Shutdown code
+
+    yield
+
     print("Shutting down AeroRhythm API...")
     await engine.dispose()
     print("Database engine disposed!")
+    
+    # # Create database tables
+    # try:
+    #     async with engine.begin() as conn:
+    #         await conn.run_sync(Base.metadata.create_all)
+    #     print("Database tables created successfully!")
+        
+    #     # Test connection
+    #     if await test_connection():
+    #         print("Database connection verified!")
+    #     else:
+    #         print("Database connection failed!")
+            
+    # except Exception as e:
+    #     print(f"Startup error: {e}")
+    
+    # yield  # This is where the application runs
+    
+    # # Shutdown code
+    # print("Shutting down AeroRhythm API...")
+    # await engine.dispose()
+    # print("Database engine disposed!")
 
 app = FastAPI(
     title="AeroRhythm API", 
     version="1.0.0",
+    description="Crew management and Roster Optimization System",
     lifespan=lifespan
 )
 
@@ -59,21 +77,24 @@ origins = [
     "http://127.0.0.1:8080",
 ]
 
-# CORS middleware (FIXED: was CODSMiddleware)
+# CORS middleware
 app.add_middleware(
-    CORSMiddleware,  # FIXED: Correct spelling
+    CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],  # FIXED: Added brackets
-    allow_headers=["*"],  # FIXED: Added brackets
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Include routers (FIXED: Correct method names)
-app.include_router(crews.router, prefix="/crews", tags=["crews"])
-app.include_router(flights.router, prefix="/flights", tags=["flights"])
-app.include_router(disruptions.router, prefix="/disruptions", tags=["disruptions"])
-app.include_router(rosters.router, prefix="/rosters", tags=["rosters"])
-app.include_router(auth.router, prefix="/auth", tags=["auth"])
+# Include the unified async router
+app.include_router(async_endpoints.router, prefix="/api/v1", tags=["api"])
+
+# Include routers
+# app.include_router(crews.router, prefix="/crews", tags=["crews"])
+# app.include_router(flights.router, prefix="/flights", tags=["flights"])
+# app.include_router(disruptions.router, prefix="/disruptions", tags=["disruptions"])
+# app.include_router(rosters.router, prefix="/rosters", tags=["rosters"])
+# app.include_router(auth.router, prefix="/auth", tags=["auth"])
 
 @app.get("/")
 async def root():
@@ -82,12 +103,12 @@ async def root():
 @app.get("/health")
 async def health_check(db: AsyncSession = Depends(get_db)):
     try:
-        # Test database connection (FIXED: Use text() for raw SQL)
-        await db.execute(text("SELECT 1"))  # FIXED: Added text() and corrected SELECT 1
+        # Test database connection
+        await db.execute(text("SELECT 1"))
         return {
             "status": "healthy", 
             "database": "connected",
-            "timestamp": "2024-01-01T00:00:00Z"  # FIXED: Removed extra quote
+            "timestamp": "2024-01-01T00:00:00Z"
         }
     except Exception as e:
         return {

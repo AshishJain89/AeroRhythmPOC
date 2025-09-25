@@ -1,8 +1,10 @@
 from datetime import datetime
 from typing import Optional
 from sqlalchemy.orm import Session
+
+from ..crud import crud
 from ..core.database import SessionLocal
-from .. import crud, models
+from .. import models
 from . import ml_model
 
 

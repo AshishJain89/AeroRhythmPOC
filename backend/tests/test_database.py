@@ -11,12 +11,14 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 from pathlib import Path
 
+from backend.app.crud import crud
+
 # Add project root to path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from backend.app.core.database import SessionLocal, engine
-from backend.app import models, crud
+from backend.app import models
 from backend.app.core import security
 from sqlalchemy import text, func
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError

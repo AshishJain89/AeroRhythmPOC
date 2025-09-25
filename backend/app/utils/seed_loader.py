@@ -2,7 +2,9 @@ import asyncio
 import json
 from pathlib import Path
 from sqlalchemy.ext.asyncio import AsyncSession
-from .. import models, crud
+
+from ..crud import crud
+from .. import models
 
 SEED_DIR = Path(__file__).parent.parent / "data" / "seed"
 

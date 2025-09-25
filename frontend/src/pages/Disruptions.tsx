@@ -16,8 +16,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
-import { crewsApi } from '@/api/crews';
-import { rostersApi, DisruptionRequest } from '@/api/rosters';
+// import { crewsApi } from '@/api/crews';
+// import { rostersApi, DisruptionRequest } from '@/api/rosters';
+import { api } from '@/api/apiClient';
 import DisruptionsFeed from '@/components/DisruptionsFeed';
 import { format } from 'date-fns/format';
 
@@ -29,21 +30,21 @@ const Disruptions = () => {
 
   const { data: disruptions = [], isLoading } = useQuery({
     queryKey: ['disruptions'],
-    queryFn: crewsApi.getDisruptions,
+    queryFn: api.getDisruptions,
   });
 
   const { data: crews = [] } = useQuery({
     queryKey: ['crews'],
-    queryFn: crewsApi.getCrews,
+    queryFn: api.getCrews,
   });
 
   const { data: flights = [] } = useQuery({
     queryKey: ['flights'],
-    queryFn: crewsApi.getFlights,
+    queryFn: api.getFlights,
   });
 
   const handleDisruptionMutation = useMutation({
-    mutationFn: rostersApi.handleDisruption,
+    mutationFn: (payload: any) => api.createDisruption(payload),
     onSuccess: (response) => {
       toast({
         title: "Disruption Handled",
@@ -96,7 +97,7 @@ const Disruptions = () => {
     const disruption = disruptions.find((d) => d.id === disruptionId);
     if (disruption) {
       handleDisruptionMutation.mutate({
-        type: disruption.type as DisruptionRequest['type'],
+        type: disruption.type,
         affected: [...disruption.affectedFlights, ...disruption.affectedCrew],
         severity: disruption.severity,
         description: disruption.description,

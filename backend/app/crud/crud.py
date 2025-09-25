@@ -6,8 +6,8 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
-from . import models
-from .core import security
+from .. import models
+from ..core import security
 
 
 # -------------------------

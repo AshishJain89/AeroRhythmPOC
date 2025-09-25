@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { format, addDays, startOfWeek, endOfWeek } from 'date-fns';
+import { format } from 'date-fns/format';
+import { startOfWeek } from 'date-fns/startOfWeek';
+import { endOfWeek } from 'date-fns/endOfWeek';
+import { addDays } from 'date-fns/addDays';
 import { 
   Calendar, 
   ChevronLeft, 
@@ -15,8 +18,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { rostersApi } from '@/api/rosters';
-import { crewsApi } from '@/api/crews';
+// import { rostersApi } from '@/api/rosters';
+// import { crewsApi } from '@/api/crews';
+import { api } from '@/api/apiClient';
 import RosterCalendar from '@/components/RosterCalendar/TimelineView';
 
 const Roster = () => {
@@ -28,20 +32,20 @@ const Roster = () => {
 
   const { data: rostersData, isLoading: rostersLoading } = useQuery({
     queryKey: ['rosters', format(weekStart, 'yyyy-MM-dd'), format(weekEnd, 'yyyy-MM-dd')],
-    queryFn: () => rostersApi.getRosters({
-      start: format(weekStart, 'yyyy-MM-dd'),
-      end: format(weekEnd, 'yyyy-MM-dd')
-    }),
+    queryFn: () => api.getRosters(
+      format(weekStart, 'yyyy-MM-dd'),
+      format(weekEnd, 'yyyy-MM-dd')
+    ),
   });
 
   const { data: crews = [], isLoading: crewsLoading } = useQuery({
     queryKey: ['crews'],
-    queryFn: crewsApi.getCrews,
+    queryFn: api.getCrews,
   });
 
   const { data: flights = [], isLoading: flightsLoading } = useQuery({
     queryKey: ['flights'],
-    queryFn: crewsApi.getFlights,
+    queryFn: api.getFlights,
   });
 
   const rosters = rostersData?.rosters || [];

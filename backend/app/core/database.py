@@ -12,15 +12,16 @@ try:
             DATABASE_URL,
             echo=True,
             pool_pre_ping=True,
+            future=True
         )
     else:
         # SQLite configuration
         engine = create_async_engine(
             DATABASE_URL,
             echo=True,
-            connect_args={"check_same_thread": False}
+            connect_args={"check_same_thread": False},
+            future=True
         )
-    
 except Exception as e:
     print(f"Database engine creation failed: {e}")
     # Fallback to SQLite
@@ -28,7 +29,8 @@ except Exception as e:
     engine = create_async_engine(
         DATABASE_URL,
         echo=True,
-        connect_args={"check_same_thread": False}
+        connect_args={"check_same_thread": False},
+        future=True
     )
 
 # Create async session factory
@@ -63,6 +65,12 @@ async def test_connection():
     except Exception as e:
         print(f"Database connection failed: {e}")
         return False
+
+async def init_db():
+    """Intialize database tables"""
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+    print("Database tables created successfully!")
 
 
 # from sqlalchemy import create_engine

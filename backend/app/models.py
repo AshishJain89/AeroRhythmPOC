@@ -1,18 +1,35 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, ForeignKey, Text, Date, Time
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
 from .core.database import Base
+from sqlalchemy import (
+    Column, 
+    Integer, 
+    String, 
+    DateTime, 
+    Boolean, 
+    ForeignKey, 
+    Text, 
+    Date, 
+    Time,
+    JSON,
+    Float
+)
+import uuid
+
+def generate_uuid():
+    return str(uuid.uuid4())
+
 
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, default=generate_uuid, index=True)
     username = Column(String(50), unique=True, index=True, nullable=False)
     email = Column(String(100), unique=True, index=True, nullable=False)
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(100))
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=datetime.now(timezone.utc))
     
     # Relationships
     disruptions = relationship("Disruption", back_populates="reporter")
@@ -21,13 +38,17 @@ class User(Base):
 class Crew(Base):
     __tablename__ = "crews"
     
-    id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(100), nullable=False, index=True)
-    role = Column(String(50), nullable=False)  # pilot, co-pilot, attendant
+    id = Column(Integer, primary_key=True, default=generate_uuid, index=True)
+    first_name = Column(String(100), nullable=False)
+    last_name = Column(String(100), nullable=False)
     employee_id = Column(String(20), unique=True, index=True)
-    base_location = Column(String(50))
+    position = Column(String(50), nullable=False)
+    home_base = Column(String(50))
+    status = Column(String(20), default="available")
+    licence_expiry = Column(Date)
+    qualifications = Column(JSON, default=[])
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     
     # Relationships
     roster_assignments = relationship("Roster", back_populates="crew")
@@ -36,31 +57,46 @@ class Crew(Base):
 class Flight(Base):
     __tablename__ = "flights"
     
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, default=generate_uuid, index=True)
     flight_number = Column(String(10), nullable=False, index=True)
     origin = Column(String(50), nullable=False)
     destination = Column(String(50), nullable=False)
-    scheduled_departure = Column(DateTime, nullable=False)
-    scheduled_arrival = Column(DateTime, nullable=False)
+    departure_time = Column(DateTime, nullable=False)
+    arrival_time = Column(DateTime, nullable=False)
     aircraft_type = Column(String(20))
     status = Column(String(20), default="scheduled")  # scheduled, active, completed, cancelled
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     
     # Relationships
     roster_assignments = relationship("Roster", back_populates="flight")
 
 
+class Job(Base):
+    __tablename__ = "jobs"
+
+    id = Column(Integer, primary_key=True, default=generate_uuid, index=True)
+    type = Column(String(100), nullable=False) # e.g. "roster_generation"
+    status = Column(String(32), nullable=False, default="PENDING") # PENDING | RUNNING | SUCCESS | FAILED
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    completed_at = Column(DateTime, nullable=True)
+    result = Column(JSON, nullable=True)
+    error_message = Column(String(1024), nullable=True)
+
+
 class Roster(Base):
     __tablename__ = "rosters"
     
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, default=generate_uuid, index=True)
     crew_id = Column(Integer, ForeignKey("crews.id"), nullable=False)
     flight_id = Column(Integer, ForeignKey("flights.id"), nullable=False)
     assignment_date = Column(Date, nullable=False)
     report_time = Column(Time, nullable=False)
     duty_type = Column(String(20))  # flight, standby, training
+    status = Column(String(20), default="scheduled")
+    confidence = Column(Float, default=1.0)
+    violations = Column(JSON, default=[])
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     
     # Relationships
     crew = relationship("Crew", back_populates="roster_assignments")
@@ -75,12 +111,13 @@ class Disruption(Base):
     description = Column(Text)
     type = Column(String(50), nullable=False)  # weather, technical, crew, etc.
     severity = Column(String(20))  # low, medium, high, critical
-    affected_flights = Column(Text)  # JSON string or comma-separated flight numbers
+    affected_flights = Column(JSON, default=[])
+    affected_crew = Column(JSON, default=[])
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime)
     status = Column(String(20), default="active")  # active, resolved, cancelled
     reporter_id = Column(Integer, ForeignKey("users.id"))
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     
     # Relationships
     reporter = relationship("User", back_populates="disruptions")
@@ -193,6 +230,16 @@ class Disruption(Base):
 #     def __repr__(self) -> str:
 #         return f"<Disruption id={self.id} type={self.type} severity={self.severity}>"
 
+
+# class Job(Base):
+#     __tablename__ = "jobs"
+#     id = Column(Integer, primary_key=True, index=True)
+#     type = Column(String(100), nullable=False) # e.g. "roster_generation"
+#     status = Column(String(32), nullable=False, default="PENDING") # PENDING | RUNNING | SUCCESS | FAILED
+#     created_at = Column(DateTime, default=datetime.now(timezone.utc))
+#     completed_at = Column(DateTime, nullable=True)
+#     result = Column(JSON, nullable=True)
+#     error_message = Column(String(1024), nullable=True)
 
 # class Job(Base):
 #     __tablename__ = "jobs"

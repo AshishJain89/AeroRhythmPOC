@@ -13,9 +13,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { crewsApi } from '@/api/crews';
-import { rostersApi } from '@/api/rosters';
-import { format, startOfWeek, endOfWeek } from 'date-fns';
+// import { crewsApi } from '@/api/crews';
+// import { rostersApi } from '@/api/rosters';
+import { api } from '@/api/apiClient';
+import { format } from 'date-fns/format';
+import { startOfWeek } from 'date-fns/startOfWeek';
+import { endOfWeek } from 'date-fns/endOfWeek';
 
 // Mock data for charts
 const utilizationData = [
@@ -45,25 +48,25 @@ const performanceData = [
 const Dashboard = () => {
   const { data: crews = [] } = useQuery({
     queryKey: ['crews'],
-    queryFn: crewsApi.getCrews,
+    queryFn: api.getCrews,
   });
 
   const { data: flights = [] } = useQuery({
     queryKey: ['flights'],
-    queryFn: crewsApi.getFlights,
+    queryFn: api.getFlights,
   });
 
   const { data: disruptions = [] } = useQuery({
     queryKey: ['disruptions'],
-    queryFn: crewsApi.getDisruptions,
+    queryFn: api.getDisruptions,
   });
 
   const { data: rostersData } = useQuery({
     queryKey: ['rosters', 'current-week'],
-    queryFn: () => rostersApi.getRosters({
-      start: format(startOfWeek(new Date()), 'yyyy-MM-dd'),
-      end: format(endOfWeek(new Date()), 'yyyy-MM-dd')
-    }),
+    queryFn: () => api.getRosters(
+      format(startOfWeek(new Date()), 'yyyy-MM-dd'),
+      format(endOfWeek(new Date()), 'yyyy-MM-dd')
+    ),
   });
 
   // Calculate metrics

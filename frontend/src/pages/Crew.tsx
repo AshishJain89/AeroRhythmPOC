@@ -15,7 +15,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { crewsApi } from '@/api/crews';
+// import { crewsApi } from '@/api/crews';
+import { api } from '@/api/apiClient';
 import CrewCard from '@/components/CrewList/CrewCard';
 import SearchBar from '@/components/Filters/SearchBar';
 
@@ -26,7 +27,7 @@ const Crew = () => {
 
   const { data: crews = [], isLoading } = useQuery({
     queryKey: ['crews'],
-    queryFn: crewsApi.getCrews,
+    queryFn: api.getCrews,
   });
 
   // Filter crews based on search and filters
