@@ -24,14 +24,14 @@ const USE_MOCK_DATA = import.meta.env.VITE_USE_MOCK_DATA === 'true';
 //   withCredentials: true,
 // });
 export const apiClient = axios.create({
-  baseURL: '${import.meta.env.VITE_API_BASE_URL}/api/v1',
+  baseURL: `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'}/api/v1`,
   withCredentials: true,
-})
+});
 
 apiClient.interceptors.response.use(
   (response) => response, 
   (error) => {
-    console.error("API error:", error?.response?.status, error?.message);
+    console.error("API error:", error.response?.data || error.message);
     return Promise.reject(error);
   }
 );
@@ -82,6 +82,16 @@ export const apiRequest = async <T>( requestFn: () => Promise<AxiosResponse<T>> 
     // This is a developer-only feature.
     // It is not intended for production use.
     console.warn( 'VITE_USE_MOCK_DATA is enabled. This should not be used in production.' );
+    // Return mock data immediately
+  }
+
+  try {
+    const response = await requestFn();
+    console.log('API Response:', response.config.url, response.data); // Debug logging
+    return response.data;
+  } catch (error) {
+    console.error('API Request failed:', error);
+    throw error;
   }
   const response = await requestFn();
   return response.data;

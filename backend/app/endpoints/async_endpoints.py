@@ -28,10 +28,10 @@ async def get_crews(skip: int = 0, limit: int = 100, db: AsyncSession = Depends(
             "position": crew.position,
             "homeBase": crew.home_base,
             "status": crew.status,
-            "licenceExpiry": crew.licence_expiry.isoformat() if crew.licence_expiry else "2026-12-31",
+            "licenceExpiry": crew.license_expiry.isoformat() if crew.license_expiry is not None else "2026-12-31",
             "qualifications": crew.qualifications or [],
             "isActive": crew.is_active,
-            "createdAt": crew.created_at.isoformat() if crew.created_at else None
+            "createdAt": crew.created_at.isoformat() if crew.created_at is not None else None
         } for crew in crews]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching crews: {str(e)}")
@@ -68,11 +68,11 @@ async def get_flights(skip: int = 0, limit: int = 100, db: AsyncSession = Depend
             "flightNumber": flight.flight_number,
             "origin": flight.origin,
             "destination": flight.destination,
-            "departureTime": flight.departure_time.isoformat() if flight.departure_time else None,
-            "arrivalTime": flight.arrival_time.isoformat() if flight.arrival_time else None,
+            "departureTime": flight.departure_time.isoformat() if flight.departure_time is not None else None,
+            "arrivalTime": flight.arrival_time.isoformat() if flight.arrival_time is not None else None,
             "aircraftType": flight.aircraft_type,
             "status": flight.status,
-            "createdAt": flight.created_at.isoformat() if flight.created_at else None
+            "createdAt": flight.created_at.isoformat() if flight.created_at is not None else None
         } for flight in flights]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching flights: {str(e)}")
@@ -113,14 +113,14 @@ async def get_rosters(
                 "id": roster.id,
                 "crewId": roster.crew_id,
                 "flightId": roster.flight_id,
-                "date": roster.assignment_date.isoformat() if roster.assignment_date else None,
-                "reportTime": roster.report_time.isoformat() if roster.report_time else None,
+                "date": roster.assignment_date.isoformat() if roster.assignment_date is not None else None,
+                "reportTime": roster.report_time.isoformat() if roster.report_time is not None else None,
                 "dutyType": roster.duty_type,
                 "status": roster.status,
-                "confidence": float(roster.confidence) if roster.confidence else 0.95,
+                "confidence": roster.confidence if roster.confidence is not None else 0.95,
                 "violations": roster.violations or [],
                 "isActive": roster.is_active,
-                "createdAt": roster.created_at.isoformat() if roster.created_at else None
+                "createdAt": roster.created_at.isoformat() if roster.created_at is not None else None
             } for roster in rosters]
         }
     except Exception as e:
@@ -163,9 +163,9 @@ async def get_disruptions(skip: int = 0, limit: int = 100, db: AsyncSession = De
             "status": disruption.status,
             "affectedFlights": disruption.affected_flights or [],
             "affectedCrew": disruption.affected_crew or [],
-            "startTime": disruption.start_time.isoformat() if disruption.start_time else None,
-            "endTime": disruption.end_time.isoformat() if disruption.end_time else None,
-            "createdAt": disruption.created_at.isoformat() if disruption.created_at else None
+            "startTime": disruption.start_time.isoformat() if disruption.start_time is not None else None,
+            "endTime": disruption.end_time.isoformat() if disruption.end_time is not None else None,
+            "createdAt": disruption.created_at.isoformat() if disruption.created_at is not None else None
         } for disruption in disruptions]
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching disruptions: {str(e)}")

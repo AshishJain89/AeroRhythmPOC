@@ -45,7 +45,7 @@ class Crew(Base):
     position = Column(String(50), nullable=False)
     home_base = Column(String(50))
     status = Column(String(20), default="available")
-    licence_expiry = Column(Date)
+    license_expiry = Column(Date)
     qualifications = Column(JSON, default=[])
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
