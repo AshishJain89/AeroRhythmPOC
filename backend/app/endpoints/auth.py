@@ -4,7 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from datetime import datetime, timedelta, timezone
 from sqlalchemy.future import select
 
-from ..models import User
+from ..models.models import User
 from ..core.security import get_password_hash
 from ..config import settings
 

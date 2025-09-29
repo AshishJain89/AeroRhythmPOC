@@ -5,8 +5,10 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import HTTPException, status
 
+from ..models import models
+
 # Correct imports
-from .. import models, schemas
+from .. import schemas
 from ..config import settings
 from typing import Optional
 

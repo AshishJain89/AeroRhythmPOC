@@ -11,17 +11,21 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 from pathlib import Path
 
-from backend.app.crud import crud
-
 # Add project root to path
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from backend.app.core.database import SessionLocal, engine
-from backend.app import models
+from backend.app.crud import crud
+
+from backend.app.core.database import SessionLocal, sync_engine
+from backend.app.models import models
+from backend.app.models.models import Base
 from backend.app.core import security
 from sqlalchemy import text, func
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+
+# Create tables
+Base.metadata.create_all(sync_engine)
 
 class DatabaseTester:
     def __init__(self):
@@ -79,9 +83,8 @@ class DatabaseTester:
         try:
             # Check if all required tables exist
             required_tables = [
-                "users", "crew", "flights", "rosters", 
-                "disruptions", "jobs", "audit_log", 
-                "compliance_rules", "conflicts"
+                "users", "crews", "flights", "rosters", 
+                "disruptions", "jobs"
             ]
             
             existing_tables = []
@@ -120,7 +123,7 @@ class DatabaseTester:
             # Check for orphaned roster assignments
             orphaned_rosters = self.db.execute(text("""
                 SELECT COUNT(*) FROM rosters r 
-                LEFT JOIN crew c ON r.crew_id = c.id 
+                LEFT JOIN crews c ON r.crew_id = c.id 
                 WHERE c.id IS NULL
             """)).scalar()
             
@@ -145,7 +148,7 @@ class DatabaseTester:
             duplicate_crews = self.db.execute(text("""
                 SELECT COUNT(*) FROM (
                     SELECT employee_id, COUNT(*) 
-                    FROM crew 
+                    FROM crews 
                     GROUP BY employee_id 
                     HAVING COUNT(*) > 1
                 ) duplicates
@@ -188,8 +191,7 @@ class DatabaseTester:
                     username="test_user_crud",
                     email="test@example.com",
                     hashed_password=hashed_password,
-                    is_active=True,
-                    is_superuser=False
+                    is_active=True
                 )
                 self.db.add(test_user)
                 self.db.commit()
@@ -227,9 +229,8 @@ class DatabaseTester:
                     first_name="Test",
                     last_name="Pilot",
                     rank="Captain",
-                    base_airport="LAX",
-                    hire_date=datetime.now(),
-                    seniority_number=100,
+                    position="CPT",
+                    home_base="LAX",
                     status="active"
                 )
                 self.db.add(test_crew)
@@ -262,21 +263,20 @@ class DatabaseTester:
             try:
                 # Create flight
                 test_flight = models.Flight(
-                    id="TEST_CRUD_001",
                     flight_number="TC001",
                     origin="LAX",
                     destination="JFK",
-                    departure=datetime.now() + timedelta(hours=1),
-                    arrival=datetime.now() + timedelta(hours=5),
+                    departure_time=datetime.now() + timedelta(hours=1),
+                    arrival_time=datetime.now() + timedelta(hours=5),
                     aircraft="B737-800",
-                    attributes={"test": True}
+                    aircraft_type="B737"
                 )
                 self.db.add(test_flight)
                 self.db.commit()
                 self.db.refresh(test_flight)
                 
                 # Read flight
-                flight = self.db.query(models.Flight).filter(models.Flight.id == "TEST_CRUD_001").first()
+                flight = self.db.query(models.Flight).filter(models.Flight.flight_number == "TC001").first()
                 if flight:
                     crud_tests.append("Flight CRUD: Create and Read")
                     
@@ -325,7 +325,7 @@ class DatabaseTester:
             # Test Crew-Roster relationship
             crew_with_rosters = self.db.execute(text("""
                 SELECT COUNT(DISTINCT c.id) 
-                FROM crew c 
+                FROM crews c 
                 INNER JOIN rosters r ON c.id = r.crew_id
             """)).scalar()
             
@@ -350,13 +350,13 @@ class DatabaseTester:
             if "test_crew_id" in self.test_data and "test_flight_id" in self.test_data:
                 try:
                     # Create a roster assignment
-                    test_roster = models.RosterAssignment(
+                    test_roster = models.Roster(
                         crew_id=self.test_data["test_crew_id"],
                         flight_id=self.test_data["test_flight_id"],
-                        start=datetime.now(),
-                        end=datetime.now() + timedelta(hours=4),
-                        position="CPT",
-                        attributes={"test": True}
+                        assignment_date=datetime.now().date(),
+                        report_time=(datetime.now() + timedelta(hours=1)).time(),
+                        duty_type="flight",
+                        status="scheduled"
                     )
                     self.db.add(test_roster)
                     self.db.commit()
@@ -369,8 +369,8 @@ class DatabaseTester:
                         self.db.commit()
                         
                         # Check if roster was deleted (cascade)
-                        roster_exists = self.db.query(models.RosterAssignment).filter(
-                            models.RosterAssignment.id == test_roster.id
+                        roster_exists = self.db.query(models.Roster).filter(
+                            models.Roster.id == test_roster.id
                         ).first()
                         
                         if not roster_exists:
@@ -408,7 +408,7 @@ class DatabaseTester:
             
             # Test simple query performance
             query_start = time.time()
-            crew_count = self.db.execute(text("SELECT COUNT(*) FROM crew")).scalar()
+            crew_count = self.db.execute(text("SELECT COUNT(*) FROM crews")).scalar()
             query_duration = time.time() - query_start
             
             if query_duration < 0.1:  # Should be very fast
@@ -420,7 +420,7 @@ class DatabaseTester:
             query_start = time.time()
             join_result = self.db.execute(text("""
                 SELECT COUNT(*) 
-                FROM crew c 
+                FROM crews c 
                 INNER JOIN rosters r ON c.id = r.crew_id
             """)).scalar()
             query_duration = time.time() - query_start
@@ -434,7 +434,7 @@ class DatabaseTester:
             query_start = time.time()
             complex_result = self.db.execute(text("""
                 SELECT c.first_name, c.last_name, COUNT(r.id) as assignment_count
-                FROM crew c 
+                FROM crews c 
                 LEFT JOIN rosters r ON c.id = r.crew_id
                 GROUP BY c.id, c.first_name, c.last_name
                 ORDER BY assignment_count DESC
@@ -480,8 +480,7 @@ class DatabaseTester:
                     username="test_transaction",
                     email="transaction@example.com",
                     hashed_password="hashed_password",
-                    is_active=True,
-                    is_superuser=False
+                    is_active=True
                 )
                 self.db.add(test_user)
                 self.db.commit()
@@ -509,8 +508,7 @@ class DatabaseTester:
                     username="test_rollback",
                     email="rollback@example.com",
                     hashed_password="hashed_password",
-                    is_active=True,
-                    is_superuser=False
+                    is_active=True
                 )
                 self.db.add(test_user)
                 self.db.rollback()  # Intentionally rollback

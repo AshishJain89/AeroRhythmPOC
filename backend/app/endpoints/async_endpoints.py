@@ -5,7 +5,7 @@ from datetime import date, timezone
 from sqlalchemy.future import select
 
 from ..core.database import get_db
-from ..models import Crew, Flight, Roster, Disruption
+from ..models.models import Crew, Flight, Roster, Disruption
 # from ..crud.async_crud import crew_crud, flight_crud, roster_crud, disruption_crud
 
 router = APIRouter()

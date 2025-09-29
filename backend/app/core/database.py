@@ -73,6 +73,34 @@ async def init_db():
     print("Database tables created successfully!")
 
 
+# Synchronous session for scripts and testing
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+# Derive synchronous URL from the async one
+SYNC_DATABASE_URL = DATABASE_URL.replace("+aiosqlite", "")
+
+sync_engine_connect_args = {}
+if "sqlite" in SYNC_DATABASE_URL:
+    sync_engine_connect_args["check_same_thread"] = False
+
+sync_engine = create_engine(
+    SYNC_DATABASE_URL,
+    echo=False,
+    connect_args=sync_engine_connect_args,
+    future=True
+)
+
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=sync_engine)
+
+def get_sync_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
 # from sqlalchemy import create_engine
 # from sqlalchemy.orm import sessionmaker, Session
 # from typing import Generator

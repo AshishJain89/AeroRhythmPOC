@@ -2,7 +2,9 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from fastapi import BackgroundTasks
 from datetime import datetime
-from .. import models, schemas
+
+from ..models import models
+from .. import schemas
 from ..services import ml_model
 from typing import Any, Optional
 

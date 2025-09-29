@@ -4,7 +4,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.core.database import engine, Base, AsyncSessionLocal
-from app.models import User
+from backend.app.models.models import User
 from app.services.auth_service import AuthService
 from sqlalchemy import select
 

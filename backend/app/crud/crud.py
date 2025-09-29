@@ -6,7 +6,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
-from .. import models
+from ..models import models
 from ..core import security
 
 
@@ -102,7 +102,7 @@ async def create_crew(
 # Flights
 # -------------------------
 async def get_flights(db: AsyncSession, skip: int = 0, limit: int = 500) -> List[models.Flight]:
-    stmt = select(models.Flight).order_by(models.Flight.departure).offset(skip).limit(limit)
+    stmt = select(models.Flight).order_by(models.Flight.departure_time).offset(skip).limit(limit)
     result = await db.execute(stmt)
     return list(result.scalars().all())
 
@@ -153,28 +153,28 @@ async def get_roster_assignments(
     end: Optional[datetime] = None,
     skip: int = 0,
     limit: int = 1000,
-) -> List[models.RosterAssignment]:
+) -> List[models.Roster]:
     stmt = (
-        select(models.RosterAssignment)
-        .options(joinedload(models.RosterAssignment.crew), joinedload(models.RosterAssignment.flight))
-        .order_by(models.RosterAssignment.start)
+        select(models.Roster)
+        .options(joinedload(models.Roster.crew), joinedload(models.Roster.flight))
+        .order_by(models.Roster.assignment_date)
     )
 
     if start and end:
-        stmt = stmt.where(and_(models.RosterAssignment.start >= start, models.RosterAssignment.end <= end))
+        stmt = stmt.where(and_(models.Roster.assignment_date >= start, models.Roster.assignment_date <= end))
     elif start:
-        stmt = stmt.where(models.RosterAssignment.end >= start)
+        stmt = stmt.where(models.Roster.assignment_date >= start)
     elif end:
-        stmt = stmt.where(models.RosterAssignment.start <= end)
+        stmt = stmt.where(models.Roster.assignment_date <= end)
 
     stmt = stmt.offset(skip).limit(limit)
     result = await db.execute(stmt)
     return list(result.scalars().all())
 
 
-async def get_assignments_for_crew(db: AsyncSession, crew_id: int) -> List[models.RosterAssignment]:
-    stmt = select(models.RosterAssignment).where(models.RosterAssignment.crew_id == crew_id).order_by(
-        models.RosterAssignment.start
+async def get_assignments_for_crew(db: AsyncSession, crew_id: int) -> List[models.Roster]:
+    stmt = select(models.Roster).where(models.Roster.crew_id == crew_id).order_by(
+        models.Roster.assignment_date
     )
     result = await db.execute(stmt)
     return list(result.scalars().all())
@@ -189,14 +189,14 @@ async def create_roster_assignment(
     end: datetime,
     position: Optional[str] = None,
     attributes: Optional[Dict[str, Any]] = None,
-) -> models.RosterAssignment:
-    assignment = models.RosterAssignment(
+) -> models.Roster:
+    assignment = models.Roster(
         crew_id=crew_id,
         flight_id=flight_id,
-        start=start,
-        end=end,
-        position=position,
-        attributes=attributes or {},
+        assignment_date=start.date(),
+        report_time=start.time(),
+        duty_type="flight",
+        status="scheduled",
     )
     db.add(assignment)
     try:
@@ -208,11 +208,11 @@ async def create_roster_assignment(
     return assignment
 
 
-async def bulk_create_roster_assignments(db: AsyncSession, assignments: List[Dict[str, Any]]) -> List[models.RosterAssignment]:
+async def bulk_create_roster_assignments(db: AsyncSession, assignments: List[Dict[str, Any]]) -> List[models.Roster]:
     """
-    Efficiently insert many assignments. `assignments` is list of dicts matching RosterAssignment fields.
+    Efficiently insert many assignments. `assignments` is list of dicts matching Roster fields.
     """
-    objs = [models.RosterAssignment(**a) for a in assignments]
+    objs = [models.Roster(**a) for a in assignments]
     db.add_all(objs)
     try:
         await db.commit()
@@ -225,7 +225,7 @@ async def bulk_create_roster_assignments(db: AsyncSession, assignments: List[Dic
 
 
 async def delete_roster_assignment(db: AsyncSession, assignment_id: int) -> bool:
-    obj = await db.get(models.RosterAssignment, assignment_id)
+    obj = await db.get(models.Roster, assignment_id)
     if not obj:
         return False
     await db.delete(obj)
@@ -270,15 +270,15 @@ async def count_uncovered_flights(db: AsyncSession, start: Optional[datetime] = 
     """
     flight_q = select(models.Flight.id)
     if start and end:
-        flight_q = flight_q.where(and_(models.Flight.departure >= start, models.Flight.arrival <= end))
+        flight_q = flight_q.where(and_(models.Flight.departure_time >= start, models.Flight.arrival_time <= end))
     flight_result = await db.execute(flight_q)
     flight_ids = [r[0] for r in flight_result.all()]
 
     if not flight_ids:
         return 0
 
-    assigned_q = select(func.count(func.distinct(models.RosterAssignment.flight_id))).where(
-        models.RosterAssignment.flight_id.in_(flight_ids)
+    assigned_q = select(func.count(func.distinct(models.Roster.flight_id))).where(
+        models.Roster.flight_id.in_(flight_ids)
     )
     assigned_result = await db.execute(assigned_q)
     assigned_count = assigned_result.scalar() or 0
@@ -288,15 +288,15 @@ async def count_uncovered_flights(db: AsyncSession, start: Optional[datetime] = 
 async def get_basic_metrics(db: AsyncSession, start: Optional[datetime] = None, end: Optional[datetime] = None) -> Dict[str, Any]:
     total_flights_q = select(func.count(models.Flight.id))
     if start and end:
-        total_flights_q = total_flights_q.where(and_(models.Flight.departure >= start, models.Flight.arrival <= end))
+        total_flights_q = total_flights_q.where(and_(models.Flight.departure_time >= start, models.Flight.arrival_time <= end))
     total_flights_result = await db.execute(total_flights_q)
     total_flights = total_flights_result.scalar() or 0
 
     uncovered = await count_uncovered_flights(db, start=start, end=end)
 
-    util_q = select(func.count(models.RosterAssignment.id))
+    util_q = select(func.count(models.Roster.id))
     if start and end:
-        util_q = util_q.where(and_(models.RosterAssignment.start >= start, models.RosterAssignment.end <= end))
+        util_q = util_q.where(and_(models.Roster.assignment_date >= start, models.Roster.assignment_date <= end))
     total_assignments_result = await db.execute(util_q)
     total_assignments = total_assignments_result.scalar() or 0
 

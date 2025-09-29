@@ -10,7 +10,7 @@ import json
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.core.database import AsyncSessionLocal
-from app.models import Crew, Flight, Disruption
+from backend.app.models.models import Crew, Flight, Disruption
 
 async def seed_basic_data():
     async with AsyncSessionLocal() as db:

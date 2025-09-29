@@ -4,7 +4,7 @@ from sqlalchemy.orm import Session
 
 from ..crud import crud
 from ..core.database import SessionLocal
-from .. import models
+from ..models import models
 from . import ml_model
 
 

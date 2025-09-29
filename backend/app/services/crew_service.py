@@ -1,7 +1,9 @@
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
-from .. import models, schemas
+
+from ..models import models
+from .. import schemas
 from typing import List, Optional
 
 class CrewService:

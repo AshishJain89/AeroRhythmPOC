@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict
 from sqlalchemy.ext.asyncio import AsyncSession
-from .. import models
+from ..models import models
 
 async def generate_roster(db: AsyncSession, start: datetime, end: datetime) -> Dict[str, Any]:
     # Example: fetch all crews and flights, assign each crew to a flight in a round-robin way

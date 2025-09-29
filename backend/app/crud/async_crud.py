@@ -3,7 +3,7 @@ from sqlalchemy.future import select
 from sqlalchemy import and_, or_
 from typing import List, Optional, Dict, Any
 from datetime import datetime, date, timezone
-from ..models import Crew, Flight, Roster, Disruption, User
+from ..models.models import Crew, Flight, Roster, Disruption, User
 
 
 class AsyncCRUD:

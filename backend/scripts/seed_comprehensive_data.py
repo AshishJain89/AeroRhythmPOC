@@ -17,7 +17,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from backend.app.core.database_async import AsyncSessionLocal, engine
-from backend.app import models
+from backend.app.models import models
 from backend.app.core import security
 from sqlalchemy import text
 from sqlalchemy.future import select

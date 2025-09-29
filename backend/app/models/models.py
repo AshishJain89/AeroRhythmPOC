@@ -1,6 +1,6 @@
 from sqlalchemy.orm import relationship
 from datetime import datetime, timezone
-from .core.database import Base
+from ..core.database import Base
 from sqlalchemy import (
     Column, 
     Integer, 
@@ -42,6 +42,7 @@ class Crew(Base):
     first_name = Column(String(100), nullable=False)
     last_name = Column(String(100), nullable=False)
     employee_id = Column(String(20), unique=True, index=True)
+    rank = Column(String(50), nullable=False)
     position = Column(String(50), nullable=False)
     home_base = Column(String(50))
     status = Column(String(20), default="available")
@@ -52,6 +53,9 @@ class Crew(Base):
     
     # Relationships
     roster_assignments = relationship("Roster", back_populates="crew")
+    certifications = relationship("CrewCertification", back_populates="crew")
+    trainings = relationship("CrewTraining", back_populates="crew")
+    leave_requests = relationship("LeaveRequest", back_populates="crew")
 
 
 class Flight(Base):
@@ -63,6 +67,7 @@ class Flight(Base):
     destination = Column(String(50), nullable=False)
     departure_time = Column(DateTime, nullable=False)
     arrival_time = Column(DateTime, nullable=False)
+    aircraft = Column(String(50), nullable=True)
     aircraft_type = Column(String(20))
     status = Column(String(20), default="scheduled")  # scheduled, active, completed, cancelled
     created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
@@ -111,6 +116,7 @@ class Disruption(Base):
     description = Column(Text)
     type = Column(String(50), nullable=False)  # weather, technical, crew, etc.
     severity = Column(String(20))  # low, medium, high, critical
+    affected = Column(JSON, default={})
     affected_flights = Column(JSON, default=[])
     affected_crew = Column(JSON, default=[])
     start_time = Column(DateTime, nullable=False)
@@ -121,6 +127,45 @@ class Disruption(Base):
     
     # Relationships
     reporter = relationship("User", back_populates="disruptions")
+
+
+class CrewCertification(Base):
+    __tablename__ = "crew_certifications"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    crew_id = Column(Integer, ForeignKey("crews.id"), nullable=False)
+    certification_name = Column(String(100), nullable=False)
+    issue_date = Column(Date, nullable=False)
+    expiry_date = Column(Date, nullable=False)
+    
+    # Relationships
+    crew = relationship("Crew", back_populates="certifications")
+
+
+class CrewTraining(Base):
+    __tablename__ = "crew_trainings"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    crew_id = Column(Integer, ForeignKey("crews.id"), nullable=False)
+    training_name = Column(String(100), nullable=False)
+    completion_date = Column(Date, nullable=False)
+    
+    # Relationships
+    crew = relationship("Crew", back_populates="trainings")
+
+
+class LeaveRequest(Base):
+    __tablename__ = "leave_requests"
+    
+    id = Column(Integer, primary_key=True, index=True)
+    crew_id = Column(Integer, ForeignKey("crews.id"), nullable=False)
+    start_date = Column(Date, nullable=False)
+    end_date = Column(Date, nullable=False)
+    reason = Column(String(200))
+    status = Column(String(20), default="pending")
+    
+    # Relationships
+    crew = relationship("Crew", back_populates="leave_requests")
 
 
 
